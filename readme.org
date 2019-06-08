@@ -1,0 +1,7 @@
+#+TITLE: readme
+
+This is a set of notes, and maybe code and stuff from my time attending the
+univ.ai course over the summer.
+
+** Licenses
+The content is MIT licensed, but the thoughts are my own so, CC-BY-NA-SA 4.0
