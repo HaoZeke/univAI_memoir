@@ -219,7 +219,26 @@
 
 These are to be used in conjunction with the materials which have all been
 forked to my own github repo. As such I will link to them and these are to be
-used mainly to capture import aspects of the discussion.
+used mainly to capture important aspects of the discussion. The topics listed
+below have videos and slides in the repositories listed.
+
+| Topic                                             | Repo                     |
+|---------------------------------------------------+--------------------------|
+| Regression (KNN and Linear)                       | [[https://github.com/univai-summerschool-2019/Regression][Regression]]               |
+| Selection and Regularization                      | [[https://github.com/univai-summerschool-2019/ValidationRegularization][ValidationRegularization]] |
+| Logistic Regression                               | [[https://github.com/univai-summerschool-2019/Classification][Classification]]           |
+| Classification Trees and Bagging                  | [[https://github.com/univai-summerschool-2019/Trees][Trees]]                    |
+| Enhanced Sampling (Boosting)                      | [[https://github.com/univai-summerschool-2019/Boosting][Boosting]]                 |
+| Perceptrons                                       | [[https://github.com/univai-summerschool-2019/ANN][ANN]]                      |
+| Neural Networks (Regularization and Optimization) | [[https://github.com/univai-summerschool-2019/ANN2][ANN2]]                     |
+
+Furthermore there are several topics covered as labs with papers.
+
+| Topic                         | Repo                   |
+|-------------------------------+------------------------|
+| Convolutional Neural Networks | CNN {[[https://github.com/univai-summerschool-2019/CNN1][One]], [[https://github.com/univai-summerschool-2019/CNN3][Three]], [[https://github.com/univai-summerschool-2019/CNN4][Four]]} |
+| Language Models               | Lang {[[https://github.com/univai-summerschool-2019/Lang1][One]], [[https://github.com/univai-summerschool-2019/Lang2][Two]], [[https://github.com/univai-summerschool-2019/Lang3][Three]]} |
+| RNNs  (Ensembles)             | [[https://github.com/univai-summerschool-2019/CaptionHack][CaptionHack]]            |
 
 * Predictors
 The measurement erorr is irreducile. Inspite of the way the measurements are
@@ -295,7 +314,10 @@ achuta@ucla.edu
 :END:
 Logistic regression depends on predicting the $Y=1$ class, or the positive
 class. Now the softmax is the generalized logistic regression mapping function,
-but is basically the linear one in the $\frac{1}{1-e^{-(\beta_{0}+\beta_{1}X)}}$.
+but is basically the linear one in the equation below.
+#+BEGIN_EXPORT latex
+$$\frac{1}{1-e^{-(\beta_{0}+\beta_{1}X)}}$$
+#+END_EXPORT
 
 So one unit change is an $e^{\beta_{1}}$ in the odds that $Y=1$
 * Sparsity
@@ -303,8 +325,8 @@ JPEG is by convention 8 by 8 bits. Consider the DCT (Discrete Cosine Transform).
 
 # $G_{u,v}=\frac{1}{4}\alpha(u)\alpha(v)\Sum_{x=0}^{7}g_{x,y}\cos{\left[\frac{(2x+1)u\pi}{16}\right]} \cos{\left[\frac{(2y+1)v\pi}{16}\right]}$
 
-Low freqency variations are more common in images. The SPIE thing on this is
-really very good.
+Low freqency variations are more common in images. The [[https://spie.org/publications/book/34917][SPIE handbook on
+compression]] this is really very good.
 
 So it turns out that when we have colors to be encoded, then we deal with them
 as linear combinations, like 3 matrices for an RGB image. The mosaic class of
@@ -316,7 +338,7 @@ for image processing. Compressive sensing, or compressed sensing. This is used
 for taking tiny datasets and forming a lot of information from it. This is
 apparently lossless (must ask for the proof). The proof is by restricted
 isometry. An approximate isometry property. A matrix $A$ is said to satisfy the
-RIP of order K with isometry constant. (ask for the rest)
+RIP of order $K$ with isometry constant. (ask for the rest)
 * Decision Trees
 :PROPERTIES:
 :CATEGORY: Pavlov
@@ -345,7 +367,7 @@ trees, but it is more relevant (computationally) to use the binary one instead.
 
 ** Errors
 The Gini index is used to determine purity post split. Another method is to use
-the max misclassification rate, weigh it according to the number of points, and
+the maxiumum misclassification rate, weigh it according to the number of points, and
 move towards the minimum of that.
 
 ** Classification Trees
@@ -361,7 +383,7 @@ data is smooth, if it is the polynomial or linear regression is better, while if
 it is a sort of jagged system, then the polynomial will be of a high degree and
 therefore we don't want to try that.
 
-There is no need for standardization typically because this is like one feature
+There is no need for standardization typically because this is one feature
 at a time.
 
 - In both cases we report only accuracies from the leaf nodes, that is the R^2
@@ -433,6 +455,9 @@ basically stores the derivative and the corresponding value of the previous
 layer, then we simply increment the value in the previous layer (this is best
 seen in the slides).
 * Language Embeddings
+:PROPERTIES:
+:CATEGORY: Rahul
+:END:
 ** Personality Traits and Sentiment Analysis
 - A simple logistic regression on a
   bag-of-words model works quite well.
@@ -473,6 +498,9 @@ Something
 # after-save-hook: haozeke/org-save-and-export-pdf
 # End:
 * Recurrent Neural Networks
+:PROPERTIES:
+:CATEGORY: Rahul
+:END:
 - The values forgotten must be trained with appropriate weights to prevent
   important aspects of the test set
 
