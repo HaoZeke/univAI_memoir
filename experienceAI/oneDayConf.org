@@ -1,0 +1,383 @@
+#+TITLE: Experience AI
+* Talk 1 (Raghu) 1
+So here we discussed Terry Pratchett ("Turtles all the way down"). Also
+discussed alexNet nad some other AI avenues. There was an example of de-oldify.
+So Netflix apparently had a recommendation engine system which was more
+performant, but not feasible for implementation.
+** About univ.ai
+Mostly not relevant. The most interesting bit is the way the advanced course
+will be working on general models. Which means that it is rather important.
+* Talk 2 (William Poole)
+This is on systems biology. It begins with the basics.
+#+CAPTION: Examples
+| Function       | Algo       |
+| Linear         | Regression |
+| Mixture models | ?          |
+|----------------+------------|
+
+So they discussed transfer learning for images, which is rather neat.
+** ML Aspects
+- Pool et al. Multiscale Mutation Clustering, PLOS Comp Bio, 2017. :: This is
+     basically just a large data set which was correlated to generate predictions.
+*** Towards more ML
+Working backwards from science towards the math and then re-encoding them into
+ML algorithms. Basically using is as a tool to traverse large data sets.
+** Perceptrons (History)
+- The original concept of Action Potentials (electrical signals from Nuerons) were
+discovered by Emil du Bois-Reymond.
+- The next piece was the integrate and fire model of Lois Lapicque (1907) which
+  was basically a model of a circuit to generate the same signal as the action potential.
+- The Perceptron was an analog ciruit of Frank Rosenblatt (1957). This is just a
+  simple net with a weighted sum and a step function activator. This system was
+  originally meant for vision for the Defence minstry.
+** Perceptrons -> Deep Neural Networks
+So now we consider the overall concept of the neuron.
+- Santiago Ramon mapped the first nuerons in the late 1800s and got the nobel
+  prize.
+- Then you can see the way the action potential fires in a way to network the
+  perceptrons which causes the generation of multlayer perceptrons
+- Finally this is just the biological analog of deep learning (not strictly in a
+  casuality loop) well from the well known $Y=f(X,W)$ along with the Back
+  Propogation learning concept (basically gradient descent)
+** Vision, Convolution and Issues
+Of course the brain is more complicated what with sensory and experiential depth
+whech hasn't yet been modeled. In any case, the idea of vision and convolutions
+is one of the best known sucesses of ANN.
+- Hubel and Weisel dealed with the way the stimulus given to a cat's visual
+  cortex was somehow related to vision
+- The convolutions were found to basically be the unitary transform the brain
+  might perform
+- This was proven by the advent of convolutional neulral networks
+** Molecular Binding and Energy Based ML
+This example is a bit off scale for my work but it is the closest.
+- Physical Notion of Energy
+- Equilibrium Distribution
+- Energy Based Generative Models :: Given X, find W such that
+     $$P(X)=\frac{1}{Z}e^{-E(X;W)}$$
+
+These basically work for (Poole et al. Chemical Boltzmann Machines in 2017 and
+Buchler et al. On Schemes of Conbinatorial). This is more towards the cellular
+level approach, but the gene regulatory network of E. Coli is an example of what
+can be done by moving away from the cellular level. Synthetic  DNA Nueral
+Networks (Cherry et al. Scaling up molecular pattern regocnition, Nature 2018)
+So the DNA computing concept allows for a simple image based classifier.
+** Biological Computation as Machine Learning
+- Molecular Binding networks :: Genetic Evloution could be a driving force
+- Genetic Regulatory networks :: Epigenetics as the driver
+- Cellular and Neuronal Networks :: Synaptic Plasticity, Biochemistry
+- Physiological Networks :: This is linked to the way certian dopamine responses
+     is similar to reinforcement learning. The driver here would be more social,
+     i.e. Education and Medicine
+- Social and Human Networks :: Belief propogation etc. This is really social,
+     driven by Laws and Media etc.
+The takeaway is that perhaps it is a large network on many time scales.
+** Recursion
+So a recently resurgent concept nowadays (Deep Compression, Han et al., Frankel et al.) is
+that any complicated system is a generative process, and so can be modeled by
+many smaller networks which are a little less complicated, or at-least on a
+disparate time-scale.
+* Talk 3 (Sriram)
+** Genomics
+So his work is basically on the patterns in genes. This is of course more of a
+medical matter. So genomic data is wide, there are always more features than
+data-sets. This is inspite of the exponential increase in sequencing.
+** Confounders
+These are essentially bits of information which invalidate the statistical
+importance of the data. Essentially, when you collect data but there is an
+inherent bias, so you cannot actually draw any conclusions from said data. For
+genomics and disease, a major confounder is ancesrty.
+** Admixtures
+This is when there exists a complicated history which allows for no clear
+categorization is possible, as in between Blue and Brown if you are say, 50% of
+each.
+
+*Why not simply classify the admixtures separately?*
+Well the answer to this, which I got after the talk has to do with the way
+discrete classes are not as performant. It is similar to LDA apparently. Will
+look into it.
+
+So what they did is that took the local ancestry and used it as a coloring
+problem.
+https://sil.do/#D470
+
+* Talk 4 (Raghu)
+This is about finding features from a large space.
+** Graphical Models
+These are distributional models to capture dependencies. They exploit
+probability and graph theory. Here they will discuss undirected graphical
+models. This are also known as Probabilistic graphical models, Markov networks,
+Markov random fields etc.
+*** What?
+So when you use a graph with nodes as variables and edges as relations.
+So a clique is a set of vertices with all inter-connections. When there are no
+edges then they should be independent when the neighbors are conditioned. So
+given a cycle A-B-C-D, then we say A and C are independent when conditioned on B
+and D.
+** Learning
+This is either structural or parameter based. That is, either you want the
+dependency graph, or the probability density function respectively.
+So basically we want the dependency graph of the distribution with as few
+samples as possible for a structured learning problem. Basically you usually
+have very few samples compared to the dimensions. So you assume that the unknown
+dependency graph is sparse, that is each vertex has at the most $d$ edges.
+
+The ideal condition here of course is when we obtain algorithms with provable
+guarantees. The inputs are samples from a distribution X, while the output is a
+dependency graph of the distribution, using the degree and number of variables
+as the parameters.
+** Gaussian Graphical Models
+So this is generated from a multivariate gaussian distribution i.e.
+$X\approxN(0,S)$ where $S$ is the covariance. This sort of thing is the best for
+continous data. Dempster in 1972 showed that if there is a *precision matrix*,
+which is the inverse of the covariane matric, then the dependency graph is given
+by the non-zeor entries of T. Whennever there is a $0$ the graph is
+conditionally independent.
+- So since the high dimensional Gaussian distribution is hard to fit, we can
+  still use the precision matrix since it is often sparse.
+
+More specifically, we can say that [VLMC] you can use just $O(d\log{n})$ so,
+this is when degree $d$ is for each vertex of the Precision matrix. This is an
+information-theoretic answer, because it is not really scalable.
+*** Packages
+GlASSO (Friedman, Hastie, Tibshirani 2008),CLIME and ACLIME (Cai, Liu) etc.
+[KKMM19] a new algorithm called *GreedyAndPrune* provably learns a much richer
+class with only $O(\log{n})$
+So if there is a max degree of $3$, but the condition number is bad. So in this
+case, with $m=150$ samples, then well their algorithm is good. Works better in
+terms of needing fewer samples.
+** Learning GGMs Greedily
+- Input samples from a GGM X
+- The goal is to learn the neighborhood of vertex 1 :: We can run in parallel
+     for all vertices
+- Phase 1: Grow a candidate neighborhood
+- Phase 2: Prune some vertices
+*** Phase 1
+- Initialize S
+- While S is small, find $j$ to minimize $var(X1|X_{S\union{j}}$ and add $j$ to $S$
+*** Phase 2
+- For every vertex, test that dropping the vertex should not decrease the
+  estimated variance.
+*** Proofs
+Then the upshot is that is can learn things better and it is more intuitive.
+** Learning Discrete Graphical Models
+Consider a graph 1-5-2 5-4 and 2-3. This distribution can be determined and is
+given by the Hammersley-Clifford Theorem.
+
+Basically, $$Pr[X=x]\prop \exp{\Sum_{C:Clique of size\leq t in G}\Phi_{C}}$$ ?
+Where $t$ is the number of interactions.
+
+** Learning Ising Models
+- Distribution $X$ with $[1,-1]$ values
+- Dependency graph $G$ on $n$ vertices
+
+Given samples from the Ising model $X$ on vertices, we can iteratively update
+weights. Once again, covering the neighborhood of vertex 1 allows for the rest
+to be obtained by running the algorithm in parallel. Since the correlations are
+only binary and positive or negative, this can be exploited as well. Basically
+there will be a +ve and -ve copy of each vertex. Now we have an easy adversarial
+setup and we may begin by initializing all the weights to be the same.
+
+More specifically, $\foreach x=(1,1,-1,1,...,)$:
+- If $x_{1}$ and $x_{i}$ agree, increase the weight to $(i,+)$
+- If $x_{1}$ and $x_{i}$ disagree, decrease the weight to $(i,-)$
+
+The example above is a toy model but the same concept is used. The update is
+based on the classical multiplicative weights method for online learning. This
+algorithm is called SPARSITRON and only has one unknown parameter.
+
+So the question is if it is ok to run it in parallel if there is some order effect.
+* Talk 5 (Pavlos: Wasserstein Generative Adversarial Network for Time Series Data Augmentation in Astronomy)
+** Training Set Acquisation
+- Manual Visual Inspection
+- Active Learning :: Use an algorithm on labeled data but use a person to get
+     input where needed
+- Synthetic Data Augmentation
+- Transfer Learning
+** Generative Neural Networks
+Basically we seek to learn the an unknown distribution. So the generative
+neural network takes a uniform distribution and finds an optimal (via KL loss
+and other stuff) predictive model.
+*** Generative Adversarial Neural Network
+This is a discriminator, it takes a generator output and a true distribution
+output. So the loss function here is usually a Binary Cross Entropy. The output
+from tis will cause the original model to change weights again. The
+discriminator is also learning and optimizing via distribution losses.
+
+- The min-max loss describes this
+
+** Training GANs
+To builg a FC simple GAnts in a 2D Gaussian
+*** Generator
+- 4 random numbers
+
+You can use Deep convolutional GANs but fully connected layers are elimenated.
+Transposed convolution is used for upsampling. Max pooling is not good, and needs
+convolution. Also you use batch sizes.
+** Challenges
+- The biggest challenge is the sensitivity to structure and stuff. *Also*, there
+is *no proof* of convergence.
+
+- The problem of producing just one successful output over and over is called
+  modal collapse. This is fixed by adding noise or by using a better penalty
+  function.
+
+Check https://github.com/soumith/ganhacks
+
+** Wasserstein (Earth-Mover) Distance GAN
+#+BEGIN_QUOTE
+Informally if the distributions are interpreted as two different ways of piling
+up a certain abount of dirt over the region D, the Wasserstein distance is the
+minimum cost of turning one pile into the other, where the cost is assumed to be
+the amount of dirt moved times the distance by which it is moved.
+#+END_QUOTE
+
+Essentially this adds a critic to the system. A ranking system onto the binary
+decision of the discriminator. This allows for a distance metric to be generated
+for every discriminator output.
+** Conditional GAN
+GANs can be conditioned to generate a certain mode of data. When we wish to
+learn multiclass data, we may use a conditional to maximize the learning from
+the commonality of the data. So the data is used maximally to work out the
+optimal weights, but for the output the conditional becomes important again.
+** Time series for GANs
+*** Conditional timestamps GANs for lightcurves
+- Basically this is done because there is a lot of variability in the
+  time-stamps. So synthetic datasets are used for a sort of ground-zero test.
+- Then when you use validated data, like starlight curvs, power demand and ecg200,
+which are well known datasets.
+- Finally when they used raw data from telescopes, they got an imbalanced
+  training set as expected, with noise, irregular sampling and length. They
+  still got good convergence.
+**** Classifiers: Inception Scores
+For images you can use an inception scores. So if you have an ideal setup as:
+1. $x$ has a diverse distribution
+2. $x$ has good quality
+When we test $x$ we basically check $p(x|y)$
+If 1. is true, then the distribution is uniform, so $p(y)$ should be wide
+If 2. is true, then $p(y|x)$ should be narrow since there should be no uncertainity
+Now we eed $p(y|x)$ and the other metrice should be very different.
+**** TSTR: Train on Synthetic Test on Real
+Well this is very obvious.
+* Talk 6 (IISc Robotics)
+Covered some hardware transfer with physics based simulations. That and some
+rudimentary learning via visual inspection.
+* Talk 7 (Achuta: Visual machines and the artificial physicist)
+Consider using ResNet18 for predicting a trajectory more correctly w.r.t. to the
+high school approach. We are considering 15 frames out of which only 3 frames
+are known.
+** Physics based ML
+So when you use both the high school version in conjuction with the neural net,
+then you get a much better prediction.
+*** Physics Based Learning
+- Residual Learning :: Combine with the physical solutions before obtaining the
+     output. In other words, learn the *null-space* due to the physical constraints.
+- Physical Input :: Use the images with information and the merge features
+- Teacher-student model :: Here you use supervision in conjuction with the
+     physical input.
+- Physical constraints :: Supervise the outputs via physical constraints.
+We can note the areas of physics as well. Light transport matrices, kinematics,
+shapes from polarization, phase retrieval, deconvolution, hyperspectral  images.
+** LiDar (3D cameras)
+Given a laser and its short pulse, use that to control the device. This is how
+3D sensing works. More basically, you get the $(x,y,z)$ postion of light reflections.
+Typically you lose information at the capture phase and no reconstruction is
+possible. The detail works well, with say, a multistripe laser scan, but you can
+still lose the finer details.
+** More light
+Blending the the physics of polarized light with AI allows for truly realistic
+3D images. In this scenario the detail is fully retained. The brewster angle
+allows you to change the polarization of light during reflection. So by using a
+polarizing filter,you can can the difference between each of these images. The
+difference needs to be tonemapped to 8-bit or something. So the fresnel
+refraction is why this works out.
+
+Typically the solution needs the solving Fresnel equations which need data which
+is not available. So the neural network is used to compute the intermediates.
+Additionally it is also used to control the issues arising from the rotational
+invariance.
+** Towards the Unification
+They used a dual stream convolutional neural network.
+*** Per image
+Three physical solutions and four intensity measures
+*** Feature
+
+Check Kadambi et al. IJCV 2017
+** AI-Powered 3D Cameras
+Using Thermal NLOS Imaging you can estimate the pose.
+** AI-Powered Document Scanner
+Use an xray source and a document scanner, which can be used to get a result
+similar to the image from an xray.
+** Regularization
+The basic concept is that you can apply a function to penalize any feature which
+is not to be part of the solution. Basically for machine learning this is about
+penalizing the weights to reduce overfitting.
+So consider A as a convolution operator (Toeplitz matrix)
+$x^{*}=argmin_{x}||Ax=b||_{2}^{2}$
+$x^{*}=argmin_{x}||Ax=b||_{2}^{2}+||\delta x||_{2}$
+The equation below regularizes the gradient of the L1 of $x$.
+$x^{*}=argmin_{x}||Ax=b||_{2}^{2}+||\delta x||_{1}$
+* Talk 8 (IISc Sheshahdri)
+He is actually a chaos theorist. Most of his work is gleaned from other
+data-sets. Which is not really a problem.
+** Global climate models
+This divides the earth into boxes arranged in grids (Henderson-Sellers, 1985).
+Interactions are captured, there are both vertical and horizontal interactions.
+The basic laws represented are conservation of momentum, mass and energy along
+with the ideal gas law.
+For momentum we know the that total derivative is actually non-linear in the
+velocity. Difference models have diference grids. The grid depiction do not
+actually show all the variables and effects, like condensation and others. These
+are therefore resolved as parameters.
+** Nonlinearity and Instability
+- Lorenz showed that flows that are nonperiodic (don't stay arbitarily close for
+arbitarily long) are unstable (diverge). This was also shown by Nemytskii and
+Stepanov (1960). These flows are neither quasi-periodic or periodic, hence
+non-periodic. Quasi-periodic flows which statisfy the criteria of being arbitary
+close for arbitarily long.
+- So for chaoes, we note that they are non-periodic, and therefore unstable, but
+  they are also *bounded* and hence chaotic.
+So the orbit remains bound by the folding of flow. Essentially the attractor
+twists and folds.
+- Basically repeated stretching, folding, and bending of the flow gives rise to
+  a chaotic attractor.
+#+BEGIN_QUOTE
+In view of the impossiblity of measuring initial conditions precisely, and
+distinguishing between a central trajectory and nearby noncentral trajectory,
+all nonperiodic trajectories are effectively unstable from the point of view
+of practical prediction.
+#+END_QUOTE
+- So though they never return to the same point, they will return to an
+  arbitarily close point. So it basically explores the entire phahse space.
+** Limits of predictability
+So the Lyapunov exponent is used to to determine the limits of predictability.
+(Abraham and Shaw, "Dynamics: The geometry of behavior")
+
+$t=T_L$ is the Lyapunov time when or when it goes to $e$ times the rest.
+** Machine learning for chaos
+The order or magnitude increase in the effective range of prediction.
+Typically errors are on like the order of 1 Lyapunov time, but using a weighted
+combination of models and time series, predictions have been extended out to 12
+Lyapunov times.
+
+The Reservior dimension $D_{r}$ greatly exceeds the dimension of the system (3)
+Pathak et al. (2018) "Hypbrid Forecasing of Chaotic Processes: Using Machine
+Learning in Conjunction..."
+
+Reservior computing is basically an example of a recurrent network. (Goodfellow
+et al., "Deep Learning")
+
+- The reservoir is basically a set of high dimensional points (typically around
+  a few hundred to a few thousand).
+
+- For a chaotic sequence the goodness of fit decreases with lead-time.
+- So the concept is to discard the exact information in favor of the
+    time-series or the historical data.
+- If the system was not chaotic, then the goodness of fit would not change with time.
+- The error at longer lead times is predictable with a bigger reservior. For 60
+  iterations, you can predict the error with a short lead time.
+- Essentially the lead time goes up, the reservior size goes up, and the
+  forcasting ability (for the error) increases.
+** Goodness of fit is smooth in the parameters but not for noise
+This is not surprising because noise is not low-dimensional, which is why it
+doesn't help, plus it is not historical.
+** Active break cycle of monsoons
