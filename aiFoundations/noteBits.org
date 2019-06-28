@@ -250,8 +250,11 @@ standard errors. Now confidence intervals may also be obtained.
 This basically is a quasi-equilibrium assumpion. This allows for the fomulation
 of multiple populations, and then as a consequencuntly
 #+BEGIN_QUOTE
-Bootstrapping is the practice of estimating (check the slides)
+Bootstrap aggregating, also called bagging, is a machine learning ensemble
+meta-algorithm designed to improve the stability and accuracy of machine
+learning algorithms used in statistical classification and regression.
 #+END_QUOTE
+The quoted text is [[https://en.wikipedia.org/wiki/Bootstrap_aggregating][from wikipedia]].
 ** Standard Errors
 ** Hypothesis Testing
 This is the formal process through wich we evaluate the validyty of a
@@ -320,6 +323,8 @@ $$\frac{1}{1-e^{-(\beta_{0}+\beta_{1}X)}}$$
 #+END_EXPORT
 
 So one unit change is an $e^{\beta_{1}}$ in the odds that $Y=1$
+- This is also called a discriminative classifier, as they directly model the
+  probability of some class being present on the basis of the features
 * Sparsity
 JPEG is by convention 8 by 8 bits. Consider the DCT (Discrete Cosine Transform).
 
@@ -507,3 +512,51 @@ Something
 First and second universal approximation theorem.
 A gaussian process can be obtained by an infinitely wide and very deep neural
 network.
+* Generative Models
+We will now consider the joint probability distribution of the output given the
+inputs.
+
+- We can consider the joint probability distribution:
+#+BEGIN_EXPORT latex
+$$P(x)=\Sum_y p(x,y)=\Sum_y p(x|y)p(y)$$
+#+END_EXPORT
+
+- Or by the conditional probability
+#+BEGIN_EXPORT latex
+$$P(x)=\frac{p(x,y)}{p(y|x)}$$
+#+END_EXPORT
+
+- We know that $p(x|y)$ does not depend on the other classes
+
+- For these situations, where the data is basically from a gaussian (one per
+  class is fine), then we can model the *mixture model*, that is we can model
+  the probability of the features given the class.
+- Furthermore we know from the definition of probabilities, that they are
+  tatntamout to the same thing, that is
+#+BEGIN_EXPORT latex
+$$p(y|x)p(x)=p(x,y)=p(x|y)p(y)$$
+$$\frac{p(x|c=1)p(c=1)}{p(x|c=1)p(c)+p(x|c=0)p(c=0)}$$
+#+END_EXPORT
+
+- In effect what we need is Bayes theorem
+- LDA is generative as it models $p(x|c)$ while logistic models $p(c|x)$ that
+  is, it is tantamount to the unlabeled logistic situation
+
+| Generative                          | Discriminative                      |
+|-------------------------------------+-------------------------------------|
+| Better at data asymmetry            | Better for callibrated probabilites |
+| Can add new classes                 | Usually less expensive              |
+| Handle missing or unlabelled data   | Preprocessing is easier             |
+| LDA and Naive Bayes are easy to fit | These need convex optimatization    |
+
+- The representations are typically *not* Gaussians, especially when applied to
+  correlated data like image data
+* Variational Autoencoders
+- When we 'blend' the latent variables together, what we are causing is a
+  reorganization in the latent variable space, which then determines the
+  Gaussians
+- The sampling cannot normally be differentiated, but for a normal distribution,
+  we know that the distribution may be expressed as the sum of the average and
+  sigma times the normal zero-one distribution
+- Try playing with the KL divergence to understand the prior and posterior
+  distribution effects
